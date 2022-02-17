@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">JokesApp</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="preference_key">pref_key</string>
+    <string name="opened_times_key">save_counter</string>
+    <string name="opened_times_app">You Opened The App</string>
+    <string name="splash_screen">Splash Screen</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/jokesListFragment">
+
+    <fragment
+        android:id="@+id/jokesListFragment"
+        android:name="com.ahmedorabi.jokesapp.features.jokes_list.presentation.ui.JokesListFragment"
+        tools:layout="@layout/fragment_jokes_list">
+
+
+        <action
+            android:id="@+id/action_jokesListFragment_to_jokeDetailsFragment"
+            app:destination="@id/jokeDetailsFragment" />
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/jokeDetailsFragment"
+        tools:layout="@layout/fragment_joke_details"
+        android:name="com.ahmedorabi.jokesapp.features.joke_details.presentation.ui.JokeDetailsFragment"
+        />
+
+
+</navigation>
