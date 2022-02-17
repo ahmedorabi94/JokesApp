@@ -43,18 +43,18 @@ class JokesListViewModelTest {
 
     @Test
     fun givenResponseSuccess_getAllJokes_shouldReturnSuccess() {
-
         val joke = Joke(
             "Programming",
-            "male",
+            "Parsing HTML with regex.",
             null,
             11,
-            "There are only 10 kinds of people in this world: those who know binary and those who don't.",
+            ".",
             "",
             false,
-            "",
-            "single"
+            "Hey, wanna hear a joke?",
+            "twopart"
         )
+
         val jokesResponse = JokesResponse(10, false, arrayListOf(joke))
 
         val state = JokesListViewState.SuccessResponse(jokesResponse)

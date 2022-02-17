@@ -34,13 +34,8 @@ class JokesListFragmentTest {
     @Test
     fun isJokesListFragmentDisplayed() {
 
-
         onView(withId(R.id.recycler_view_main)).perform(click())
-
-
-
         onView(withId(R.id.jokeDetailsId)).check(matches(isDisplayed()))
-
-
+        
     }
 }

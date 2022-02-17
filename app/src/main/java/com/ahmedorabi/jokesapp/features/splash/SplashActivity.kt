@@ -21,7 +21,6 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
     private var counterValue = 0
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
         setCounterValue()
         displayCounterValue()
 
-        
+
         lifecycleScope.launch {
 
             delay(3000)

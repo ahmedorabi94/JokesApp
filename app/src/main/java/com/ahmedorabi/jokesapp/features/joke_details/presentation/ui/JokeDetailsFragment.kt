@@ -9,10 +9,8 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.ahmedorabi.jokesapp.databinding.FragmentJokeDetailsBinding
 import com.ahmedorabi.jokesapp.domain.Joke
-import dagger.hilt.android.AndroidEntryPoint
 
 
-@AndroidEntryPoint
 class JokeDetailsFragment : DialogFragment() {
 
     private var _binding: FragmentJokeDetailsBinding? = null
@@ -34,19 +32,19 @@ class JokeDetailsFragment : DialogFragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showJokeDetails()
+    }
 
+    @SuppressLint("SetTextI18n")
+    private fun showJokeDetails() {
         joke?.let {
             binding.jokeIdTV.text = "ID : " + it.id
             binding.jokeTypeTV.text = "Type : " + it.type
             binding.jokeSetupTV.text = "Setup : " + it.setup
             binding.jokePunchlineTV.text = "Punchline : " + it.delivery
-
-
         }
-
     }
 
     override fun onResume() {
