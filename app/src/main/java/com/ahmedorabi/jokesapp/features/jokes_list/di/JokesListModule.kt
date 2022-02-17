@@ -23,15 +23,15 @@ object JokesListModule {
 
     @Singleton
     @Provides
-    fun provideJokesRepository(usersDataSource: JokesDataSource): JokesRepository {
-        return JokesRepository(usersDataSource)
+    fun provideJokesRepository(jokesDataSource: JokesDataSource): JokesRepository {
+        return JokesRepository(jokesDataSource)
     }
 
 
     @Singleton
     @Provides
-    fun provideUseCase(usersRepository: JokesRepository): GetJokesUseCase {
-        return GetJokesUseCase(usersRepository)
+    fun provideUseCase(jokesRepository: JokesRepository): GetJokesUseCase {
+        return GetJokesUseCase(jokesRepository)
     }
 
 

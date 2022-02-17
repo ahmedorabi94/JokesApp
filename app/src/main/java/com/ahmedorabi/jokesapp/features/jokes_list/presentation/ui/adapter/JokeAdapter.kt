@@ -46,8 +46,6 @@ class JokeAdapter(private val callback: (joke: Joke) -> Unit) :
         fun bind(item: Joke) {
             binding.jokeTypeTV.text = "Joke Type : ${item.type}"
             binding.jokeCategoryTv.text = "Joke Category : ${item.category}"
-            //   binding.tvTime.text =  "Creation Time : ${Calendar.getInstance().time}"
-
 
         }
 

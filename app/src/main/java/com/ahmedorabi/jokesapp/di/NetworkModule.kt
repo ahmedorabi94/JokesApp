@@ -55,7 +55,6 @@ object NetworkModule {
             .baseUrl("https://v2.jokeapi.dev/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            //   .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
     }
 
