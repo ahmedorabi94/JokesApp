@@ -2,8 +2,6 @@ package com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ahmedorabi.jokesapp.TestCoroutineRule
-import com.ahmedorabi.jokesapp.data.api.ErrorResponse
-import com.ahmedorabi.jokesapp.data.api.ResultWrapper
 import com.ahmedorabi.jokesapp.domain.Joke
 import com.ahmedorabi.jokesapp.domain.JokesResponse
 import com.ahmedorabi.jokesapp.features.jokes_list.usecases.GetJokesUseCase
@@ -58,10 +56,12 @@ class JokesListViewModelTest {
         val jokesResponse = JokesResponse(10, false, arrayListOf(joke))
 
         val state = JokesListViewState.SuccessResponse(jokesResponse)
+        val result = JokesListResult.SuccessResponse(jokesResponse)
+
 
         val flow = flow {
             emit(
-                ResultWrapper.Success(jokesResponse)
+                result
             )
         }
 
@@ -85,10 +85,11 @@ class JokesListViewModelTest {
     fun givenResponseError_getAllJokes_shouldReturnError() {
 
         val state = JokesListViewState.Error("404 Not Found")
+        val result = JokesListResult.Error("404 Not Found")
 
         val flow = flow {
             emit(
-                ResultWrapper.Error(404, ErrorResponse(message = "404 Not Found"))
+                result
             )
         }
 

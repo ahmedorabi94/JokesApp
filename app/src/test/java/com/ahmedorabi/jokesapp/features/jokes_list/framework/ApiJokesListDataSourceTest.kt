@@ -3,14 +3,13 @@ package com.ahmedorabi.jokesapp.features.jokes_list.framework
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ahmedorabi.jokesapp.TestCoroutineRule
 import com.ahmedorabi.jokesapp.data.api.ApiService
-import com.ahmedorabi.jokesapp.data.api.ResultWrapper
 import com.ahmedorabi.jokesapp.domain.Joke
 import com.ahmedorabi.jokesapp.domain.JokesResponse
+import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.CoreMatchers
-import org.hamcrest.MatcherAssert
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -63,6 +62,7 @@ class ApiJokesListDataSourceTest {
             "twopart"
         )
         val jokesResponse = JokesResponse(10, false, arrayListOf(joke))
+        val result = JokesListResult.SuccessResponse(jokesResponse)
 
         runBlocking {
 
@@ -70,14 +70,10 @@ class ApiJokesListDataSourceTest {
                 .`when`(apiService)
                 .getJokesResponseAsync()
 
-            val response = apiJokesListDataSource.getJokesResponse().first()
+            val response = apiJokesListDataSource.getJokesResponse().drop(1).first()
 
-            when (response) {
-                is ResultWrapper.Success -> {
-                    val result = response.value
-                    Assert.assertEquals(result.jokes[0].category, "Programming")
-                }
-            }
+            Assert.assertEquals(response, result)
+
         }
     }
 
@@ -85,18 +81,18 @@ class ApiJokesListDataSourceTest {
     @Test
     fun shouldGetListJokesFailureResponse() {
 
+        val result = JokesListResult.Error("NetworkError")
+
         runBlocking {
 
             given(apiService.getJokesResponseAsync()).willAnswer {
                 throw IOException("Ooops")
             }
 
-            val response = apiJokesListDataSource.getJokesResponse().first()
+            val response = apiJokesListDataSource.getJokesResponse().drop(1).first()
 
-            MatcherAssert.assertThat(
-                response,
-                CoreMatchers.instanceOf(ResultWrapper.NetworkError::class.java)
-            )
+            Assert.assertEquals(response, result)
+
 
         }
     }

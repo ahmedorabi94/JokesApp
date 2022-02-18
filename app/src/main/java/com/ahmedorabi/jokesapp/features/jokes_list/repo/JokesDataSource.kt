@@ -1,11 +1,10 @@
 package com.ahmedorabi.jokesapp.features.jokes_list.repo
 
-import com.ahmedorabi.jokesapp.data.api.ResultWrapper
-import com.ahmedorabi.jokesapp.domain.JokesResponse
+import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListResult
 import kotlinx.coroutines.flow.Flow
 
 interface JokesDataSource {
 
-    suspend fun getJokesResponse(): Flow<ResultWrapper<JokesResponse>>
+    suspend fun getJokesResponse(): Flow<JokesListResult>
 
 }

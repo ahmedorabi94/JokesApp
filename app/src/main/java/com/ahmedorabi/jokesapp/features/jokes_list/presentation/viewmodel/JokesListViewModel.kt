@@ -2,11 +2,13 @@ package com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ahmedorabi.jokesapp.data.api.ResultWrapper
 import com.ahmedorabi.jokesapp.features.jokes_list.usecases.GetJokesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,36 +44,26 @@ class JokesListViewModel @Inject constructor(
 
 
     private fun getJokesResponseFlow() {
-
-
         viewModelScope.launch {
             useCase.invoke()
-                .onStart {
-                    _state.value = JokesListViewState.Loading
-
-                }.catch { exception ->
-                    _state.value = JokesListViewState.Error(exception.message ?: "Unknown Error")
-                }.collect { response ->
+                .collect { response ->
                     when (response) {
-                        is ResultWrapper.Success -> {
-                            _state.value = JokesListViewState.SuccessResponse(response.value)
+                        is JokesListResult.SuccessResponse -> {
+                            _state.value = JokesListViewState.SuccessResponse(response.data)
                         }
-                        is ResultWrapper.Error -> {
+                        is JokesListResult.Error -> {
                             _state.value =
-                                JokesListViewState.Error(response.error?.message ?: "Unknown Error")
+                                JokesListViewState.Error(response.errorMsg)
                         }
-                        is ResultWrapper.NetworkError -> {
-                            _state.value = JokesListViewState.Error("NetworkError")
-
+                        is JokesListResult.Loading -> {
+                            _state.value = JokesListViewState.Loading
                         }
-                        ResultWrapper.NoContentError -> {
-                            _state.value = JokesListViewState.Error("NoContentError")
-
+                        JokesListResult.Idle -> {
+                            _state.value = JokesListViewState.Idle
                         }
                     }
                 }
         }
-
 
     }
 

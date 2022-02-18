@@ -13,8 +13,8 @@ import com.ahmedorabi.jokesapp.R
 import com.ahmedorabi.jokesapp.databinding.FragmentJokesListBinding
 import com.ahmedorabi.jokesapp.features.jokes_list.presentation.ui.adapter.JokeAdapter
 import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListEvents
-import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListViewState
 import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListViewModel
+import com.ahmedorabi.jokesapp.features.jokes_list.presentation.viewmodel.JokesListViewState
 import com.ahmedorabi.jokesapp.features.utils.EspressoIdlingResource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
